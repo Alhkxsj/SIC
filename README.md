@@ -7,4 +7,4 @@
 请在 Termux 中复制粘贴以下命令，即可开始安装：
 
 ```bash
-curl -sSLo install.sh https://raw.githubusercontent.com/Alhkxsj/SIC/main/install.sh && bash install.sh
+curl -sSLo install.sh https://raw.githubusercontent.com/Alhkxsj/SIC/main/installer.sh && bash install.sh
