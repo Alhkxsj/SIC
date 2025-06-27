@@ -1,6 +1,10 @@
-## 🚀 快速安装（推荐）
+# 🌸 终端环境安装
 
-**复制以下一条命令，在 Termux 中粘贴运行即可：**
+> 作者：[@快手@啊泠好困想睡觉]
+
+## 🚀 一键安装命令
+
+请在 Termux 中复制粘贴以下命令，即可开始安装：
 
 ```bash
-pkg install curl -y && curl -sSLo install.sh https://raw.githubusercontent.com/Alhkxsj/termux-installer/main/安装脚本.sh && bash install.sh
+curl -sSLo install.sh https://raw.githubusercontent.com/Alhkxsj/SIC/main/install.sh && bash install.sh
