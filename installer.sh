@@ -127,7 +127,7 @@ select_group() {
   fi
 }
 
-# -------------------- 包列表（完整且准确） --------------------
+# ------------------------------- 包列表 ----------------------------
 
 core_packages=(
   abseil-cpp
@@ -342,13 +342,18 @@ core_packages=(
   vim
   wget
   which
-  x11-repo
-  x11-utils
-  x11-xserver-utils
   xclip
   xsel
   zip
   zsh
+  aria2
+  nano
+  micro
+  ripgrep
+  fzf
+  fd
+  exa
+  proot
 )
 
 x11_packages=(
@@ -374,6 +379,11 @@ x11_packages=(
   libxext
   libxrandr
   libxrender
+  x11-repo
+  x11-utils
+  x11-xserver-utils
+  mesa
+  mesa-utils
 )
 
 media_packages=(
@@ -386,6 +396,8 @@ media_packages=(
   imagemagick
   sox
   mpv
+  pulseaudio
+  pulseaudio-utils
 )
 
 container_packages=(
@@ -394,7 +406,9 @@ container_packages=(
   fakeroot
   proot
   proot-distro
-  pulseaudio
+  podman
+  buildah
+  runc
 )
 
 other_tools=(
@@ -411,15 +425,26 @@ other_tools=(
   nano
   micro
   tree
+  fzf
+  ripgrep
+  fd
+  exa
+  bat
   termux-api
   termux-tools
   termux-exec
   termux-elf-cleaner
   termux-am
-  termux-key
   termux-keyring
   termux-services
   termux-x11
+  zsh
+  tmux
+  screen
+  git
+  openssh
+  wget
+  curl
 )
 
 # -------------------- 安装流程 --------------------
