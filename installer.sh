@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 set -e
 
-# 🌟 万能终端环境安装器 V3.2 | Author: 快手@啊泠好困想睡觉
+# 🌟 万能终端环境安装器 V3.3 | Author: 快手@啊泠好困想睡觉
 
 # -------------------- 开头自动修复 dpkg --------------------
 echo -e "\033[1;36m[INFO] 检查并修复 dpkg 状态...\033[0m"
@@ -26,6 +26,18 @@ EOF
   echo -e "\033[1;32m✔ 已切换为清华源\033[0m"
 else
   echo -e "\033[1;90m使用默认官方源\033[0m"
+fi
+
+# -------------------- 添加常用第三方仓库 --------------------
+echo -ne "\033[1;36m是否添加常用第三方仓库（x11-repo 和 game-repo）？(y/n): \033[0m"
+read -r add_repos
+if [[ "$add_repos" =~ ^[Yy]$ ]]; then
+  echo -e "\033[1;34m正在添加 x11-repo 和 game-repo...\033[0m"
+  pkg install -y x11-repo game-repo
+  apt update -y
+  echo -e "\033[1;32m✔ 已添加第三方仓库\033[0m"
+else
+  echo -e "\033[1;90m跳过添加第三方仓库\033[0m"
 fi
 
 # -------------------- 心情语录 --------------------
@@ -404,6 +416,7 @@ other_tools=(
   termux-exec
   termux-elf-cleaner
   termux-am
+  termux-key
   termux-keyring
   termux-services
   termux-x11
@@ -419,7 +432,7 @@ select_group "其他终端美化与实用工具" "${other_tools[@]}"
 # -------------------- 尾声寄语 --------------------
 echo -e "\n\033[1;35m🎉 所有选中软件包安装完成 🎉\033[0m"
 echo -e "\n\033[1;36m— 作者寄语 —\033[0m"
-echo -e "\033[1;37m其实我还忘不掉那个人，但我已经不知道怎么面对她了，现在我也有对象了。\033[0m"
+echo -e "\033[1;37m其实我还忘不掉他，每当在校园相遇，不知如何面对，只好匆匆而过。\033[0m"
 echo -e "\n\033[1;36m— 原创诗《范思瑶》 —\033[0m"
 echo -e "\033[1;35m繁花落，思成各，思君朝暮化烟络，瑶台雪空灼。\n\
 情难收，怨难收，三秋一别覆水舟，碎琼满西楼。\n\
