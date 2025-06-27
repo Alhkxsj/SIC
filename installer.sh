@@ -1,14 +1,20 @@
 #!/data/data/com.termux/files/usr/bin/bash
 set -e
 
-# 万能终端环境安装器 V3.2 | Author: 快手@啊泠好困想睡觉
+# 🌟 万能终端环境安装器 V3.2 | Author: 快手@啊泠好困想睡觉
 
+# -------------------- 开头自动修复 dpkg --------------------
+echo -e "\033[1;36m[INFO] 检查并修复 dpkg 状态...\033[0m"
+dpkg --configure -a 2>/dev/null || true
+apt --fix-broken install -y 2>/dev/null || true
+
+# -------------------- 初始展示 --------------------
 echo -e "\n\033[1;35m╭────────────────────────────────────────────╮\033[0m"
-echo -e "\033[1;35m│ 🌸 欢迎使用终端环境安装器 🌸 │\033[0m"
+echo -e "\033[1;35m│ 🌸 欢迎使用终端环境安装器 🌸               │\033[0m"
 echo -e "\033[1;35m╰────────────────────────────────────────────╯\033[0m"
 echo -e "\033[1;36mGitHub: https://github.com/Alhkxsj\033[0m\n"
 
-# 切换清华源提示
+# -------------------- 切换清华源 --------------------
 echo -ne "\033[1;36m是否切换为清华镜像源以加速安装？(y/n): \033[0m"
 read -r change_mirror
 if [[ "$change_mirror" =~ ^[Yy]$ ]]; then
@@ -18,9 +24,11 @@ deb https://mirrors.tuna.tsinghua.edu.cn/termux/apt/termux-main stable main
 EOF
   apt update -y
   echo -e "\033[1;32m✔ 已切换为清华源\033[0m"
+else
+  echo -e "\033[1;90m使用默认官方源\033[0m"
 fi
 
-# 情感语录 & 函数
+# -------------------- 心情语录 --------------------
 HEART_QUOTES=(
   "『其实…我只是不想你把我忘了。』"
   "『我们真的…回不去了吗？』"
@@ -57,8 +65,8 @@ show_progress() {
   local total=30
   for ((i=0; i<=total; i++)); do
     local done=$(printf "%${i}s" | tr ' ' '#')
-    local remain=$(printf "%$((total - i))s")
-    echo -ne "\r\033[1;35m安装进度：[$done$remain] $((i * 100 / total))%%\033[0m"
+    local remain=$(printf "%$((total-i))s")
+    echo -ne "\r\033[1;35m安装进度：[$done$remain] $((i*100/total))%%\033[0m"
     sleep 0.05
   done
   echo
@@ -88,7 +96,6 @@ install_package() {
     echo -e "\033[1;31m✘ 安装失败：$pkg\033[0m"
     echo -e "\033[1;90m👉 请检查依赖或包冲突，或手动尝试安装：apt install $pkg\033[0m"
   fi
-
   echo -e "\033[1;90m--------------------------------------\033[0m"
 }
 
@@ -108,7 +115,8 @@ select_group() {
   fi
 }
 
-# 包列表
+# -------------------- 包列表（完整且准确） --------------------
+
 core_packages=(
   abseil-cpp
   android-tools
@@ -132,7 +140,6 @@ core_packages=(
   command-not-found
   coreutils
   cowsay
-  cups
   curl
   dash
   debianutils
@@ -172,7 +179,8 @@ core_packages=(
   id3lib
   id3v2
   inetutils
-  jsoncpp
+  iso-codes
+  jq
   krb5
   lazygit
   ldns
@@ -220,12 +228,120 @@ core_packages=(
   libgmp
   libgnutls
   libgpg-error
+  libiconv
+  libid3tag
+  libidn2
+  libjpeg-turbo
+  libksba
+  libldap
+  liblz4
+  liblzma
+  libmagic
+  libmpc
+  libnettle
+  libogg
+  libpcre
+  libpixman
+  libpng
+  libpng16
+  libpsl
+  libreadline
+  libresolv
+  librsvg
+  libsqlite
+  libssh2
+  libstdc++
+  libtasn1
+  libtiff
+  libunistring
+  libutf8proc
+  libuuid
+  libvpx
+  libwavpack
+  libwebp
+  libx11
+  libxext
+  libxml2
+  libxrandr
+  libxrender
+  libz
+  llvm
+  locales
+  lsof
+  ltrace
+  lua
+  lua53
+  lua54
+  lz4
+  lzip
+  lzma
+  m4
+  make
+  man
+  man-db
+  man-pages
+  mpfr
+  mpv
+  ncurses-utils
+  neofetch
+  net-tools
+  netcat-openbsd
+  nghttp2
+  nmap
+  nslookup
+  openjdk-17
+  openssh
+  openssl
+  p7zip
+  patch
+  pciutils
+  perl
+  pinentry
+  pkg-config
+  procps
+  pulseaudio
+  pulseaudio-utils
+  python
+  python2
+  python3
+  readline
+  rsync
+  screen
+  sed
+  sqlite
+  sudo
+  tar
+  termux-api
+  termux-elf-cleaner
+  termux-exec
+  termux-keyring
+  termux-services
+  termux-tools
+  termux-x11
+  tig
+  tmux
+  toilet
+  tree
+  tzdata
+  udisks2
+  unrar
+  unzip
+  util-linux
+  vim
+  wget
+  which
+  x11-repo
+  x11-utils
+  x11-xserver-utils
+  xclip
+  xsel
+  zip
+  zsh
 )
 
 x11_packages=(
-  adwaita-icon-theme-legacy
   adwaita-icon-theme
-  angle-android
+  adwaita-icon-theme-legacy
   appstream
   gdk-pixbuf
   gnome-font-viewer
@@ -253,13 +369,11 @@ media_packages=(
   id3lib
   id3v2
   exiftool
-  giflib
-  libflac
-  libde265
   ffmpeg
-  mpv
+  giflib
   imagemagick
   sox
+  mpv
 )
 
 container_packages=(
@@ -295,17 +409,16 @@ other_tools=(
   termux-x11
 )
 
-# 安装流程
+# -------------------- 安装流程 --------------------
 select_group "核心基础工具包" "${core_packages[@]}"
 select_group "图形界面 X11 支持包" "${x11_packages[@]}"
 select_group "多媒体支持包" "${media_packages[@]}"
 select_group "容器与虚拟化支持包" "${container_packages[@]}"
 select_group "其他终端美化与实用工具" "${other_tools[@]}"
 
-# 尾声寄语
+# -------------------- 尾声寄语 --------------------
 echo -e "\n\033[1;35m🎉 所有选中软件包安装完成 🎉\033[0m"
 echo -e "\n\033[1;36m— 作者寄语 —\033[0m"
-echo -e "\033[1;37m其实我还忘不掉他，每当在校园相遇，不知如何面对，只好匆匆而过。。\033[0m"
+echo -e "\033[1;37m其实我还忘不掉那个人，每当在校园相遇，不知如何面对，只好匆匆而过。\033[0m"
 echo -e "\n\033[1;36m— 原创诗《范思瑶》 —\033[0m"
-echo -e "\033[1;35m繁花落，思成各，思君朝暮化烟络，瑶台雪空灼。 情难收，怨难收，三秋一别覆水舟，碎琼满西楼。 玉不琢，人不诺，不悔真心错付昨。 簪不合，泪成河，不念旧诺自沉疴。 镜不映，影伶仃，不照人间共白头。\033[0m"
-echo -e "\n\033[1;32m🌸 致终端中的你：Forever in Memory 🌸\033[0m\n"
+echo -e "\033[1;35m繁花落，思成各，思君朝暮化烟络，瑶台雪空灼。 情难收，怨难收，三秋一别覆水舟，碎琼
